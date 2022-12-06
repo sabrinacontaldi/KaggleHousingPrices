@@ -460,32 +460,32 @@ def transformData(trainDF, testDF):
     #----------------------------------------------------------------------------------------------------
     
     #EXTER QUAL VALUES: NaN, 'Gd', 'TA', 'Ex', 'Fa'
-    #PREPROCESSING METHOD: NaN = Mode(train), Gd = 0, TA = 1, Ex = 2, Fa = 3
-    trainDF.loc[:, 'ExterQual'] = trainDF.loc[:, 'ExterQual'].map(lambda v: 0 if v=="Gd" else v)
-    trainDF.loc[:, 'ExterQual'] = trainDF.loc[:, 'ExterQual'].map(lambda v: 1 if v=="TA" else v)
-    trainDF.loc[:, 'ExterQual'] = trainDF.loc[:, 'ExterQual'].map(lambda v: 2 if v=="Ex" else v)
+    #PREPROCESSING METHOD: NaN = Mode(train), Gd = 0, TA = 1, Ex = 2, Fa = 3 [Ex=0, Gd=1, Ta=2, Fa=3]
+    trainDF.loc[:, 'ExterQual'] = trainDF.loc[:, 'ExterQual'].map(lambda v: 0 if v=="Ex" else v)
+    trainDF.loc[:, 'ExterQual'] = trainDF.loc[:, 'ExterQual'].map(lambda v: 1 if v=="Gd" else v)
+    trainDF.loc[:, 'ExterQual'] = trainDF.loc[:, 'ExterQual'].map(lambda v: 2 if v=="TA" else v)
     trainDF.loc[:, 'ExterQual'] = trainDF.loc[:, 'ExterQual'].map(lambda v: 3 if v=="Fa" else v)
     trainDF.loc[:, 'ExterQual'] = trainDF.loc[:, 'ExterQual'].fillna(trainDF.loc[:, 'ExterQual'].mode().iloc[0])
     
-    testDF.loc[:, 'ExterQual'] = testDF.loc[:, 'ExterQual'].map(lambda v: 0 if v=="Gd" else v)
-    testDF.loc[:, 'ExterQual'] = testDF.loc[:, 'ExterQual'].map(lambda v: 1 if v=="TA" else v)
-    testDF.loc[:, 'ExterQual'] = testDF.loc[:, 'ExterQual'].map(lambda v: 2 if v=="Ex" else v)
+    testDF.loc[:, 'ExterQual'] = testDF.loc[:, 'ExterQual'].map(lambda v: 0 if v=="Ex" else v)
+    testDF.loc[:, 'ExterQual'] = testDF.loc[:, 'ExterQual'].map(lambda v: 1 if v=="Gd" else v)
+    testDF.loc[:, 'ExterQual'] = testDF.loc[:, 'ExterQual'].map(lambda v: 2 if v=="TA" else v)
     testDF.loc[:, 'ExterQual'] = testDF.loc[:, 'ExterQual'].map(lambda v: 3 if v=="Fa" else v)
     testDF.loc[:, 'ExterQual'] = testDF.loc[:, 'ExterQual'].fillna(trainDF.loc[:, 'ExterQual'].mode().iloc[0])
     #----------------------------------------------------------------------------------------------------
 
     #EXTER COND VALUES: NaN, 'TA', 'Gd', 'Fa', 'Po', 'Ex'
     #PREPROCESSING METHOD: NaN = Mode(train), Gd = 0, TA = 1, Ex = 2, Fa = 3, Po = 4
-    trainDF.loc[:, 'ExterCond'] = trainDF.loc[:, 'ExterCond'].map(lambda v: 0 if v=="Gd" else v)
-    trainDF.loc[:, 'ExterCond'] = trainDF.loc[:, 'ExterCond'].map(lambda v: 1 if v=="TA" else v)
-    trainDF.loc[:, 'ExterCond'] = trainDF.loc[:, 'ExterCond'].map(lambda v: 2 if v=="Ex" else v)
+    trainDF.loc[:, 'ExterCond'] = trainDF.loc[:, 'ExterCond'].map(lambda v: 0 if v=="Ex" else v)
+    trainDF.loc[:, 'ExterCond'] = trainDF.loc[:, 'ExterCond'].map(lambda v: 1 if v=="Gd" else v)
+    trainDF.loc[:, 'ExterCond'] = trainDF.loc[:, 'ExterCond'].map(lambda v: 2 if v=="TA" else v)
     trainDF.loc[:, 'ExterCond'] = trainDF.loc[:, 'ExterCond'].map(lambda v: 3 if v=="Fa" else v)
     trainDF.loc[:, 'ExterCond'] = trainDF.loc[:, 'ExterCond'].map(lambda v: 4 if v=="Po" else v)
     trainDF.loc[:, 'ExterCond'] = trainDF.loc[:, 'ExterCond'].fillna(trainDF.loc[:, 'ExterCond'].mode().iloc[0])
     
-    testDF.loc[:, 'ExterCond'] = testDF.loc[:, 'ExterCond'].map(lambda v: 0 if v=="Gd" else v)
-    testDF.loc[:, 'ExterCond'] = testDF.loc[:, 'ExterCond'].map(lambda v: 1 if v=="TA" else v)
-    testDF.loc[:, 'ExterCond'] = testDF.loc[:, 'ExterCond'].map(lambda v: 2 if v=="Ex" else v)
+    testDF.loc[:, 'ExterCond'] = testDF.loc[:, 'ExterCond'].map(lambda v: 0 if v=="Ex" else v)
+    testDF.loc[:, 'ExterCond'] = testDF.loc[:, 'ExterCond'].map(lambda v: 1 if v=="Gd" else v)
+    testDF.loc[:, 'ExterCond'] = testDF.loc[:, 'ExterCond'].map(lambda v: 2 if v=="TA" else v)
     testDF.loc[:, 'ExterCond'] = testDF.loc[:, 'ExterCond'].map(lambda v: 3 if v=="Fa" else v)
     testDF.loc[:, 'ExterCond'] = testDF.loc[:, 'ExterCond'].map(lambda v: 4 if v=="Po" else v)
     testDF.loc[:, 'ExterCond'] = testDF.loc[:, 'ExterCond'].fillna(trainDF.loc[:, 'ExterCond'].mode().iloc[0])
@@ -753,31 +753,43 @@ def transformData(trainDF, testDF):
     
     #BsmtQual Values: NaN, 'Gd', 'TA', 'Ex', 'Fa'
     #Preprocessing method: NaN = Mode(trainDf), 'Gd'=0, 'TA'=1, 'Ex'=2, 'Fa'=3
-    trainDF.loc[:, 'BsmtQual'] = trainDF.loc[:, 'BsmtQual'].map(lambda v: 0 if v=="Gd" else v)
-    trainDF.loc[:, 'BsmtQual'] = trainDF.loc[:, 'BsmtQual'].map(lambda v: 1 if v=="TA" else v)
-    trainDF.loc[:, 'BsmtQual'] = trainDF.loc[:, 'BsmtQual'].map(lambda v: 2 if v=="Ex" else v)
+    trainDF.loc[:, 'BsmtQual'] = trainDF.loc[:, 'BsmtQual'].map(lambda v: 0 if v=="Ex" else v)
+    trainDF.loc[:, 'BsmtQual'] = trainDF.loc[:, 'BsmtQual'].map(lambda v: 1 if v=="Gd" else v)
+    trainDF.loc[:, 'BsmtQual'] = trainDF.loc[:, 'BsmtQual'].map(lambda v: 2 if v=="TA" else v)
     trainDF.loc[:, 'BsmtQual'] = trainDF.loc[:, 'BsmtQual'].map(lambda v: 3 if v=="Fa" else v)
     trainDF.loc[:, 'BsmtQual'] = trainDF.loc[:, 'BsmtQual'].fillna(trainDF.loc[:, 'BsmtQual'].mode().iloc[0])
     
-    testDF.loc[:, 'BsmtQual'] = testDF.loc[:, 'BsmtQual'].map(lambda v: 0 if v=="Gd" else v)
-    testDF.loc[:, 'BsmtQual'] = testDF.loc[:, 'BsmtQual'].map(lambda v: 1 if v=="TA" else v)
-    testDF.loc[:, 'BsmtQual'] = testDF.loc[:, 'BsmtQual'].map(lambda v: 2 if v=="Ex" else v)
+    testDF.loc[:, 'BsmtQual'] = testDF.loc[:, 'BsmtQual'].map(lambda v: 0 if v=="Ex" else v)
+    testDF.loc[:, 'BsmtQual'] = testDF.loc[:, 'BsmtQual'].map(lambda v: 1 if v=="Gd" else v)
+    testDF.loc[:, 'BsmtQual'] = testDF.loc[:, 'BsmtQual'].map(lambda v: 2 if v=="TA" else v)
     testDF.loc[:, 'BsmtQual'] = testDF.loc[:, 'BsmtQual'].map(lambda v: 3 if v=="Fa" else v)
     testDF.loc[:, 'BsmtQual'] = testDF.loc[:, 'BsmtQual'].fillna(trainDF.loc[:, 'BsmtQual'].mode().iloc[0])
     #----------------------------------------------------------------------------------------------------
     
     #BsmtCond Values: NaN, 'TA', 'Gd', 'Fa', 'Po'
     #Preprocessing method: NaN = Mode(trainDf), 'TA'=0, 'Gd'=1, 'Fa'=2, 'Po'=3
-    trainDF.loc[:, 'BsmtCond'] = trainDF.loc[:, 'BsmtCond'].map(lambda v: 0 if v=="TA" else v)
+    # trainDF.loc[:, 'BsmtCond'] = trainDF.loc[:, 'BsmtCond'].map(lambda v: 0 if v=="Gd" else v)
+    # trainDF.loc[:, 'BsmtCond'] = trainDF.loc[:, 'BsmtCond'].map(lambda v: 1 if v=="TA" else v)
+    # trainDF.loc[:, 'BsmtCond'] = trainDF.loc[:, 'BsmtCond'].map(lambda v: 2 if v=="Fa" else v)
+    # trainDF.loc[:, 'BsmtCond'] = trainDF.loc[:, 'BsmtCond'].map(lambda v: 3 if v=="Po" else v)
+    # trainDF.loc[:, 'BsmtCond'] = trainDF.loc[:, 'BsmtCond'].fillna(trainDF.loc[:, 'BsmtCond'].mode().iloc[0])
+    
+    # testDF.loc[:, 'BsmtCond'] = testDF.loc[:, 'BsmtCond'].map(lambda v: 0 if v=="Gd" else v)
+    # testDF.loc[:, 'BsmtCond'] = testDF.loc[:, 'BsmtCond'].map(lambda v: 1 if v=="TA" else v)
+    # testDF.loc[:, 'BsmtCond'] = testDF.loc[:, 'BsmtCond'].map(lambda v: 2 if v=="Fa" else v)
+    # testDF.loc[:, 'BsmtCond'] = testDF.loc[:, 'BsmtCond'].map(lambda v: 3 if v=="Po" else v)
+    # testDF.loc[:, 'BsmtCond'] = testDF.loc[:, 'BsmtCond'].fillna(trainDF.loc[:, 'BsmtCond'].mode().iloc[0])
+    
     trainDF.loc[:, 'BsmtCond'] = trainDF.loc[:, 'BsmtCond'].map(lambda v: 1 if v=="Gd" else v)
-    trainDF.loc[:, 'BsmtCond'] = trainDF.loc[:, 'BsmtCond'].map(lambda v: 2 if v=="Fa" else v)
-    trainDF.loc[:, 'BsmtCond'] = trainDF.loc[:, 'BsmtCond'].map(lambda v: 3 if v=="Po" else v)
+    trainDF.loc[:, 'BsmtCond'] = trainDF.loc[:, 'BsmtCond'].map(lambda v: 2 if v=="TA" else v)
+    trainDF.loc[:, 'BsmtCond'] = trainDF.loc[:, 'BsmtCond'].map(lambda v: 3 if v=="Fa" else v)
+    trainDF.loc[:, 'BsmtCond'] = trainDF.loc[:, 'BsmtCond'].map(lambda v: 4 if v=="Po" else v)
     trainDF.loc[:, 'BsmtCond'] = trainDF.loc[:, 'BsmtCond'].fillna(trainDF.loc[:, 'BsmtCond'].mode().iloc[0])
     
-    testDF.loc[:, 'BsmtCond'] = testDF.loc[:, 'BsmtCond'].map(lambda v: 0 if v=="TA" else v)
     testDF.loc[:, 'BsmtCond'] = testDF.loc[:, 'BsmtCond'].map(lambda v: 1 if v=="Gd" else v)
-    testDF.loc[:, 'BsmtCond'] = testDF.loc[:, 'BsmtCond'].map(lambda v: 2 if v=="Fa" else v)
-    testDF.loc[:, 'BsmtCond'] = testDF.loc[:, 'BsmtCond'].map(lambda v: 3 if v=="Po" else v)
+    testDF.loc[:, 'BsmtCond'] = testDF.loc[:, 'BsmtCond'].map(lambda v: 2 if v=="TA" else v)
+    testDF.loc[:, 'BsmtCond'] = testDF.loc[:, 'BsmtCond'].map(lambda v: 3 if v=="Fa" else v)
+    testDF.loc[:, 'BsmtCond'] = testDF.loc[:, 'BsmtCond'].map(lambda v: 4 if v=="Po" else v)
     testDF.loc[:, 'BsmtCond'] = testDF.loc[:, 'BsmtCond'].fillna(trainDF.loc[:, 'BsmtCond'].mode().iloc[0])
     #----------------------------------------------------------------------------------------------------
     
@@ -859,31 +871,31 @@ def transformData(trainDF, testDF):
     
     #KitchenQual Values: NaN, 'Gd', 'TA', 'Ex', 'Fa'
     #Preprocessing Method: NaN = Mode(trainDf), 'Gd'=0, 'TA'=1, 'Ex'=2, 'Fa'=3
-    trainDF.loc[:, 'KitchenQual'] = trainDF.loc[:, 'KitchenQual'].map(lambda v: 0 if v=="Gd" else v)
-    trainDF.loc[:, 'KitchenQual'] = trainDF.loc[:, 'KitchenQual'].map(lambda v: 1 if v=="TA" else v)
-    trainDF.loc[:, 'KitchenQual'] = trainDF.loc[:, 'KitchenQual'].map(lambda v: 2 if v=="Ex" else v)
+    trainDF.loc[:, 'KitchenQual'] = trainDF.loc[:, 'KitchenQual'].map(lambda v: 0 if v=="Ex" else v)
+    trainDF.loc[:, 'KitchenQual'] = trainDF.loc[:, 'KitchenQual'].map(lambda v: 1 if v=="Gd" else v)
+    trainDF.loc[:, 'KitchenQual'] = trainDF.loc[:, 'KitchenQual'].map(lambda v: 2 if v=="TA" else v)
     trainDF.loc[:, 'KitchenQual'] = trainDF.loc[:, 'KitchenQual'].map(lambda v: 3 if v=="Fa" else v)
     trainDF.loc[:, 'KitchenQual'] = trainDF.loc[:, 'KitchenQual'].fillna(trainDF.loc[:, 'KitchenQual'].mode().iloc[0])
     
-    testDF.loc[:, 'KitchenQual'] = testDF.loc[:, 'KitchenQual'].map(lambda v: 0 if v=="Gd" else v)
-    testDF.loc[:, 'KitchenQual'] = testDF.loc[:, 'KitchenQual'].map(lambda v: 1 if v=="TA" else v)
-    testDF.loc[:, 'KitchenQual'] = testDF.loc[:, 'KitchenQual'].map(lambda v: 2 if v=="Ex" else v)
+    testDF.loc[:, 'KitchenQual'] = testDF.loc[:, 'KitchenQual'].map(lambda v: 0 if v=="Ex" else v)
+    testDF.loc[:, 'KitchenQual'] = testDF.loc[:, 'KitchenQual'].map(lambda v: 1 if v=="Gd" else v)
+    testDF.loc[:, 'KitchenQual'] = testDF.loc[:, 'KitchenQual'].map(lambda v: 2 if v=="TA" else v)
     testDF.loc[:, 'KitchenQual'] = testDF.loc[:, 'KitchenQual'].map(lambda v: 3 if v=="Fa" else v)
     testDF.loc[:, 'KitchenQual'] = testDF.loc[:, 'KitchenQual'].fillna(trainDF.loc[:, 'KitchenQual'].mode().iloc[0])
     #----------------------------------------------------------------------------------------------------
     
     #FireplaceQu values: NaN, 'TA', 'Gd', 'Fa', 'Po', 'Ex'
     #Preprocessing Method: NaN = Mode(train), Gd = 0, TA = 1, Ex = 2, Fa = 3, Po = 4
-    trainDF.loc[:, 'FireplaceQu'] = trainDF.loc[:, 'FireplaceQu'].map(lambda v: 0 if v=="Gd" else v)
-    trainDF.loc[:, 'FireplaceQu'] = trainDF.loc[:, 'FireplaceQu'].map(lambda v: 1 if v=="TA" else v)
-    trainDF.loc[:, 'FireplaceQu'] = trainDF.loc[:, 'FireplaceQu'].map(lambda v: 2 if v=="Ex" else v)
+    trainDF.loc[:, 'FireplaceQu'] = trainDF.loc[:, 'FireplaceQu'].map(lambda v: 0 if v=="Ex" else v)
+    trainDF.loc[:, 'FireplaceQu'] = trainDF.loc[:, 'FireplaceQu'].map(lambda v: 1 if v=="Gd" else v)
+    trainDF.loc[:, 'FireplaceQu'] = trainDF.loc[:, 'FireplaceQu'].map(lambda v: 2 if v=="TA" else v)
     trainDF.loc[:, 'FireplaceQu'] = trainDF.loc[:, 'FireplaceQu'].map(lambda v: 3 if v=="Fa" else v)
     trainDF.loc[:, 'FireplaceQu'] = trainDF.loc[:, 'FireplaceQu'].map(lambda v: 4 if v=="Po" else v)
     trainDF.loc[:, 'FireplaceQu'] = trainDF.loc[:, 'FireplaceQu'].fillna(trainDF.loc[:, 'FireplaceQu'].mode().iloc[0])
     
-    testDF.loc[:, 'FireplaceQu'] = testDF.loc[:, 'FireplaceQu'].map(lambda v: 0 if v=="Gd" else v)
-    testDF.loc[:, 'FireplaceQu'] = testDF.loc[:, 'FireplaceQu'].map(lambda v: 1 if v=="TA" else v)
-    testDF.loc[:, 'FireplaceQu'] = testDF.loc[:, 'FireplaceQu'].map(lambda v: 2 if v=="Ex" else v)
+    testDF.loc[:, 'FireplaceQu'] = testDF.loc[:, 'FireplaceQu'].map(lambda v: 0 if v=="Ex" else v)
+    testDF.loc[:, 'FireplaceQu'] = testDF.loc[:, 'FireplaceQu'].map(lambda v: 1 if v=="Gd" else v)
+    testDF.loc[:, 'FireplaceQu'] = testDF.loc[:, 'FireplaceQu'].map(lambda v: 2 if v=="TA" else v)
     testDF.loc[:, 'FireplaceQu'] = testDF.loc[:, 'FireplaceQu'].map(lambda v: 3 if v=="Fa" else v)
     testDF.loc[:, 'FireplaceQu'] = testDF.loc[:, 'FireplaceQu'].map(lambda v: 4 if v=="Po" else v)
     testDF.loc[:, 'FireplaceQu'] = testDF.loc[:, 'FireplaceQu'].fillna(trainDF.loc[:, 'FireplaceQu'].mode().iloc[0])
@@ -929,16 +941,16 @@ def transformData(trainDF, testDF):
     
     #GarageQual values: NaN, 'TA', 'Gd', 'Fa', 'Po', 'Ex'
     #Preprocessing Method: NaN = Mode(train), Gd = 0, TA = 1, Ex = 2, Fa = 3, Po = 4
-    trainDF.loc[:, 'GarageQual'] = trainDF.loc[:, 'GarageQual'].map(lambda v: 0 if v=="Gd" else v)
-    trainDF.loc[:, 'GarageQual'] = trainDF.loc[:, 'GarageQual'].map(lambda v: 1 if v=="TA" else v)
-    trainDF.loc[:, 'GarageQual'] = trainDF.loc[:, 'GarageQual'].map(lambda v: 2 if v=="Ex" else v)
+    trainDF.loc[:, 'GarageQual'] = trainDF.loc[:, 'GarageQual'].map(lambda v: 0 if v=="Ex" else v)
+    trainDF.loc[:, 'GarageQual'] = trainDF.loc[:, 'GarageQual'].map(lambda v: 1 if v=="Gd" else v)
+    trainDF.loc[:, 'GarageQual'] = trainDF.loc[:, 'GarageQual'].map(lambda v: 2 if v=="TA" else v)
     trainDF.loc[:, 'GarageQual'] = trainDF.loc[:, 'GarageQual'].map(lambda v: 3 if v=="Fa" else v)
     trainDF.loc[:, 'GarageQual'] = trainDF.loc[:, 'GarageQual'].map(lambda v: 4 if v=="Po" else v)
     trainDF.loc[:, 'GarageQual'] = trainDF.loc[:, 'GarageQual'].fillna(trainDF.loc[:, 'GarageQual'].mode().iloc[0])
     
-    testDF.loc[:, 'GarageQual'] = testDF.loc[:, 'GarageQual'].map(lambda v: 0 if v=="Gd" else v)
-    testDF.loc[:, 'GarageQual'] = testDF.loc[:, 'GarageQual'].map(lambda v: 1 if v=="TA" else v)
-    testDF.loc[:, 'GarageQual'] = testDF.loc[:, 'GarageQual'].map(lambda v: 2 if v=="Ex" else v)
+    testDF.loc[:, 'GarageQual'] = testDF.loc[:, 'GarageQual'].map(lambda v: 0 if v=="Ex" else v)
+    testDF.loc[:, 'GarageQual'] = testDF.loc[:, 'GarageQual'].map(lambda v: 1 if v=="Gd" else v)
+    testDF.loc[:, 'GarageQual'] = testDF.loc[:, 'GarageQual'].map(lambda v: 2 if v=="TA" else v)
     testDF.loc[:, 'GarageQual'] = testDF.loc[:, 'GarageQual'].map(lambda v: 3 if v=="Fa" else v)
     testDF.loc[:, 'GarageQual'] = testDF.loc[:, 'GarageQual'].map(lambda v: 4 if v=="Po" else v)
     testDF.loc[:, 'GarageQual'] = testDF.loc[:, 'GarageQual'].fillna(trainDF.loc[:, 'GarageQual'].mode().iloc[0])
@@ -946,16 +958,16 @@ def transformData(trainDF, testDF):
     
     #GarageCond values: NaN, 'TA', 'Gd', 'Fa', 'Po', 'Ex'
     #Preprocessing Method: NaN = Mode(train), Gd = 0, TA = 1, Ex = 2, Fa = 3, Po = 4
-    trainDF.loc[:, 'GarageCond'] = trainDF.loc[:, 'GarageCond'].map(lambda v: 0 if v=="Gd" else v)
-    trainDF.loc[:, 'GarageCond'] = trainDF.loc[:, 'GarageCond'].map(lambda v: 1 if v=="TA" else v)
-    trainDF.loc[:, 'GarageCond'] = trainDF.loc[:, 'GarageCond'].map(lambda v: 2 if v=="Ex" else v)
+    trainDF.loc[:, 'GarageCond'] = trainDF.loc[:, 'GarageCond'].map(lambda v: 0 if v=="Ex" else v)
+    trainDF.loc[:, 'GarageCond'] = trainDF.loc[:, 'GarageCond'].map(lambda v: 1 if v=="Gd" else v)
+    trainDF.loc[:, 'GarageCond'] = trainDF.loc[:, 'GarageCond'].map(lambda v: 2 if v=="TA" else v)
     trainDF.loc[:, 'GarageCond'] = trainDF.loc[:, 'GarageCond'].map(lambda v: 3 if v=="Fa" else v)
     trainDF.loc[:, 'GarageCond'] = trainDF.loc[:, 'GarageCond'].map(lambda v: 4 if v=="Po" else v)
     trainDF.loc[:, 'GarageCond'] = trainDF.loc[:, 'GarageCond'].fillna(trainDF.loc[:, 'GarageCond'].mode().iloc[0])
     
-    testDF.loc[:, 'GarageCond'] = testDF.loc[:, 'GarageCond'].map(lambda v: 0 if v=="Gd" else v)
-    testDF.loc[:, 'GarageCond'] = testDF.loc[:, 'GarageCond'].map(lambda v: 1 if v=="TA" else v)
-    testDF.loc[:, 'GarageCond'] = testDF.loc[:, 'GarageCond'].map(lambda v: 2 if v=="Ex" else v)
+    testDF.loc[:, 'GarageCond'] = testDF.loc[:, 'GarageCond'].map(lambda v: 0 if v=="Ex" else v)
+    testDF.loc[:, 'GarageCond'] = testDF.loc[:, 'GarageCond'].map(lambda v: 1 if v=="Gd" else v)
+    testDF.loc[:, 'GarageCond'] = testDF.loc[:, 'GarageCond'].map(lambda v: 2 if v=="TA" else v)
     testDF.loc[:, 'GarageCond'] = testDF.loc[:, 'GarageCond'].map(lambda v: 3 if v=="Fa" else v)
     testDF.loc[:, 'GarageCond'] = testDF.loc[:, 'GarageCond'].map(lambda v: 4 if v=="Po" else v)
     testDF.loc[:, 'GarageCond'] = testDF.loc[:, 'GarageCond'].fillna(trainDF.loc[:, 'GarageCond'].mode().iloc[0])
@@ -976,14 +988,24 @@ def transformData(trainDF, testDF):
     
     #PoolQC values: NaN, 'Ex', 'Fa', 'Gd'
     #Preprocessing Method: NaN = Mode(train), 'Ex'=0, 'Fa'=1, 'Gd'=2
+    # trainDF.loc[:, 'PoolQC'] = trainDF.loc[:, 'PoolQC'].map(lambda v: 0 if v=="Ex" else v)
+    # trainDF.loc[:, 'PoolQC'] = trainDF.loc[:, 'PoolQC'].map(lambda v: 1 if v=="Gd" else v)
+    # trainDF.loc[:, 'PoolQC'] = trainDF.loc[:, 'PoolQC'].map(lambda v: 2 if v=="Fa" else v)
+    # trainDF.loc[:, 'PoolQC'] = trainDF.loc[:, 'PoolQC'].fillna(trainDF.loc[:, 'PoolQC'].mode().iloc[0])
+    
+    # testDF.loc[:, 'PoolQC'] = testDF.loc[:, 'PoolQC'].map(lambda v: 0 if v=="Ex" else v)
+    # testDF.loc[:, 'PoolQC'] = testDF.loc[:, 'PoolQC'].map(lambda v: 1 if v=="Gd" else v)
+    # testDF.loc[:, 'PoolQC'] = testDF.loc[:, 'PoolQC'].map(lambda v: 2 if v=="Fa" else v)
+    # testDF.loc[:, 'PoolQC'] = testDF.loc[:, 'PoolQC'].fillna(trainDF.loc[:, 'PoolQC'].mode().iloc[0])
+    
     trainDF.loc[:, 'PoolQC'] = trainDF.loc[:, 'PoolQC'].map(lambda v: 0 if v=="Ex" else v)
-    trainDF.loc[:, 'PoolQC'] = trainDF.loc[:, 'PoolQC'].map(lambda v: 1 if v=="Fa" else v)
-    trainDF.loc[:, 'PoolQC'] = trainDF.loc[:, 'PoolQC'].map(lambda v: 2 if v=="Gd" else v)
+    trainDF.loc[:, 'PoolQC'] = trainDF.loc[:, 'PoolQC'].map(lambda v: 1 if v=="Gd" else v)
+    trainDF.loc[:, 'PoolQC'] = trainDF.loc[:, 'PoolQC'].map(lambda v: 3 if v=="Fa" else v)
     trainDF.loc[:, 'PoolQC'] = trainDF.loc[:, 'PoolQC'].fillna(trainDF.loc[:, 'PoolQC'].mode().iloc[0])
     
     testDF.loc[:, 'PoolQC'] = testDF.loc[:, 'PoolQC'].map(lambda v: 0 if v=="Ex" else v)
-    testDF.loc[:, 'PoolQC'] = testDF.loc[:, 'PoolQC'].map(lambda v: 1 if v=="Fa" else v)
-    testDF.loc[:, 'PoolQC'] = testDF.loc[:, 'PoolQC'].map(lambda v: 2 if v=="Gd" else v)
+    testDF.loc[:, 'PoolQC'] = testDF.loc[:, 'PoolQC'].map(lambda v: 1 if v=="Gd" else v)
+    testDF.loc[:, 'PoolQC'] = testDF.loc[:, 'PoolQC'].map(lambda v: 3 if v=="Fa" else v)
     testDF.loc[:, 'PoolQC'] = testDF.loc[:, 'PoolQC'].fillna(trainDF.loc[:, 'PoolQC'].mode().iloc[0])
     #----------------------------------------------------------------------------------------------------
     
